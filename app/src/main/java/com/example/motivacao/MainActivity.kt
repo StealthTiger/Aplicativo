@@ -1,5 +1,6 @@
 package com.example.motivacao
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -142,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         texto = findViewById(R.id.novoTexto)
     }
 
-    fun Clique(view: View){
+    fun Clique(view: View) {
 
         val tamanhoArray = frases.size
         val numeroAleatorio = java.util.Random().nextInt(tamanhoArray)
@@ -154,5 +155,18 @@ class MainActivity : AppCompatActivity() {
         val pick = fundos.get(random)
         val cor = Color.parseColor(pick)
         tela.setBackgroundColor(cor)
+
+    }
+
+    fun Compartilhar(view: View){
+
+        val mensagem = texto.text.toString()
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT ,mensagem )
+        intent.type = "text/plain"
+        startActivity(Intent.createChooser(intent, "Compartilhar"))
+
     }
 }
